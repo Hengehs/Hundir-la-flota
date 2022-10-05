@@ -28,6 +28,7 @@ while True:
     print(tab_player.forma)
     print()
     print(tab_player_riv.forma)
+    print("Si quieres salir del juego pulsa la letra q")
     if not "O" in tab_player.forma:
         ganador = "Gana la máquina, más suerte la próxima vez"
         break
@@ -37,9 +38,13 @@ while True:
         break
 
     resultado_disp = fn.disparo_player(tab_ia.forma, tab_player_riv.forma, barcos_ia)
-    tab_ia.forma = resultado_disp[0]
-    tab_player_riv.forma = resultado_disp[1]
-    barcos_ia = resultado_disp[2]
+    if resultado_disp == False:
+        ganador = "Hasta la próxima"
+        break
+    else:
+        tab_ia.forma = resultado_disp[0]
+        tab_player_riv.forma = resultado_disp[1]
+        barcos_ia = resultado_disp[2]
 
     resultado_disp = fn.disparo_ia(tab_player.forma, tab_ia_riv.forma, barcos_player)
     tab_player.forma = resultado_disp[0]

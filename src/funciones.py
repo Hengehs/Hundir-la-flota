@@ -59,13 +59,17 @@ def coloca_barco(tablero, tamano_barco):
 def disparo_player(tablero_ia, tab_player_riv, barcos_ia):
     if not "O" in tablero_ia:
         return tablero_ia, tab_player_riv, barcos_ia
+    
+    shoot = [input("Indica la fila de disparo: "), input("Indica la columna de disparo: ")]
+    if "q" in shoot:
+        return False
     try:
-        shoot = [int(input("Indica la fila de disparo: "))-1, int(input("Indica la columna de disparo: "))-1]
+        shoot = [int(shoot[0]), int(shoot[1])]
 
         if tablero_ia[shoot[0], shoot[1]] == " ":
             tablero_ia[shoot[0], shoot[1]], tab_player_riv[shoot[0], shoot[1]] = "-", "-"
             return tablero_ia, tab_player_riv, barcos_ia
-        
+
         elif tablero_ia[shoot[0], shoot[1]] == "O":
             tablero_ia[shoot[0], shoot[1]], tab_player_riv[shoot[0], shoot[1]] = "X", "X"
             for barco in barcos_ia:
@@ -77,7 +81,7 @@ def disparo_player(tablero_ia, tab_player_riv, barcos_ia):
                     break
             print(tab_player_riv)
             return disparo_player(tablero_ia, tab_player_riv, barcos_ia)
-        
+
         else:
             print("Ya has disparado en esa ubicación")
             return disparo_player(tablero_ia, tab_player_riv, barcos_ia)
